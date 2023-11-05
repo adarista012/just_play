@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:just_play/app/presentation/pages/splash_page.dart';
+import 'package:just_play/app/core/routes/app_routes.dart';
+import 'package:just_play/app/core/routes/routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,11 +11,12 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       title: "Just Play",
       debugShowCheckedModeBanner: false,
+      getPages: appRoutes,
+      initialRoute: Routes.SPLASH,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashPage(),
     );
   }
 }
