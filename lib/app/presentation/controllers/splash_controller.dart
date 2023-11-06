@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:just_play/app/core/routes/routes.dart';
 
@@ -15,14 +16,19 @@ class SplashController extends GetxController {
 
   _init() async {
     await Future.delayed(const Duration(milliseconds: 1240));
-    // _session = "session";
-    if (_session == null) {
-      _routeName = Routes.LOGIN;
-    } else {
-      _routeName = Routes.HOME;
-    }
-    if (_routeName != null) {
-      Get.offAllNamed(_routeName!);
-    }
+    FirebaseAuth.instance.authStateChanges().listen(
+      (User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+          _routeName = Routes.LOGIN;
+        } else {
+          print('User is signed in!');
+          _routeName = Routes.HOME;
+        }
+        if (_routeName != null) {
+          Get.offAllNamed(_routeName!);
+        }
+      },
+    );
   }
 }
