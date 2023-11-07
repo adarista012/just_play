@@ -6,17 +6,20 @@ class MyTextField extends StatelessWidget {
     required this.isPassword,
     required this.label,
     required this.errorText,
+    this.onChanged,
   });
 
   final bool isPassword;
   final String label;
   final String? errorText;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextField(
+        onChanged: onChanged,
         obscureText: isPassword,
         decoration: InputDecoration(
           labelText: label,

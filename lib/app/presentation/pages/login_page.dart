@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:just_play/app/core/theme/app_text_styles.dart';
+import 'package:just_play/app/presentation/controllers/login_controller.dart';
 import 'package:just_play/app/widgets/my_login_form.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final LoginController controller = Get.put(LoginController());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
@@ -22,7 +25,7 @@ class LoginPage extends StatelessWidget {
                 height: width / 2,
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "Log In",
+                  controller.title,
                   style: AppTextStyles.title,
                 ),
               ),
