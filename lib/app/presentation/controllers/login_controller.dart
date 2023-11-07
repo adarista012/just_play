@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:just_play/app/data/repositories/auth_repository_impl.dart';
 
 class LoginController extends GetxController {
   final String _title = "Log In";
@@ -12,6 +13,11 @@ class LoginController extends GetxController {
 
   String? _passwordError;
   String? get passwordError => _passwordError;
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  final AuthRepositoryImpl auth = Get.find();
 
   emailOnChanged(String? str) {
     _emailError = null;
@@ -38,15 +44,18 @@ class LoginController extends GetxController {
     update();
   }
 
-  void login() {
+  void login() async {
     if (_emailError == null &&
         _passwordError == null &&
         _email != null &&
         _password != null &&
         _email!.isNotEmpty &&
         _password!.isNotEmpty) {
-      print("login");
+      _isLoading = true;
+      update();
+      await auth.logIn(_email!, _password!);
+      _isLoading = false;
+      update();
     }
-    update();
   }
 }

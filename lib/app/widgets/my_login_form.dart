@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_play/app/core/colors/app_colors.dart';
 import 'package:just_play/app/presentation/controllers/login_controller.dart';
 import 'package:just_play/app/widgets/my_divider.dart';
 import 'package:just_play/app/widgets/my_text_file.dart';
@@ -31,20 +32,25 @@ class MyLoginForm extends StatelessWidget {
                   errorText: controller.passwordError,
                 ),
                 const SizedBox(height: 8.0),
-                MaterialButton(
-                  height: 54,
-                  color: Colors.black,
-                  onPressed: controller.login,
-                  shape: const StadiumBorder(),
-                  child: const Text(
-                    "Log In",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
+                controller.isLoading
+                    ? Center(
+                        child:
+                            CircularProgressIndicator(color: AppColors.black),
+                      )
+                    : MaterialButton(
+                        height: 54,
+                        color: Colors.black,
+                        onPressed: controller.login,
+                        shape: const StadiumBorder(),
+                        child: const Text(
+                          "Log In",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
                 const SizedBox(height: 16.0),
                 const MyDivider(),
                 const SizedBox(height: 16.0),
