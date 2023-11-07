@@ -17,6 +17,9 @@ class LoginController extends GetxController {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _isLoadingGoogle = false;
+  bool get isLoadingGoogle => _isLoadingGoogle;
+
   final AuthRepositoryImpl auth = Get.find();
 
   emailOnChanged(String? str) {
@@ -57,5 +60,13 @@ class LoginController extends GetxController {
       _isLoading = false;
       update();
     }
+  }
+
+  void googleLogin() async {
+    _isLoadingGoogle = true;
+    update();
+    await auth.googleLogin();
+    _isLoadingGoogle = false;
+    update();
   }
 }

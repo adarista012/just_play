@@ -5,4 +5,5 @@ abstract class AppColors {
   static Color white = Colors.white;
   static Color green = Colors.green;
   static Color red = Colors.red;
+  static Color redAccent = Colors.redAccent;
 }

@@ -15,10 +15,11 @@ class HomePage extends StatelessWidget {
           children: [
             const Text("Home Page"),
             ElevatedButton(
-                onPressed: () {
-                  auth.signOut();
-                },
-                child: const Text("sign out")),
+              onPressed: () {
+                auth.signOut();
+              },
+              child: const Text("sign out"),
+            ),
           ],
         ),
       ),

@@ -54,20 +54,25 @@ class MyLoginForm extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 const MyDivider(),
                 const SizedBox(height: 16.0),
-                MaterialButton(
-                  height: 54,
-                  color: Colors.redAccent,
-                  shape: const StadiumBorder(),
-                  onPressed: () {},
-                  child: const Text(
-                    "Log in with Google",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
+                controller.isLoadingGoogle
+                    ? Center(
+                        child: CircularProgressIndicator(
+                            color: AppColors.redAccent),
+                      )
+                    : MaterialButton(
+                        height: 54,
+                        color: AppColors.redAccent,
+                        shape: const StadiumBorder(),
+                        onPressed: controller.googleLogin,
+                        child: Text(
+                          "Log in with Google",
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
               ],
             ),
           );

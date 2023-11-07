@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:just_play/app/core/colors/app_colors.dart';
 import 'package:just_play/app/domain/repositories/auth_repository.dart';
 
@@ -10,7 +11,7 @@ class AuthRepositoryImpl extends AuthRepository {
   final FirebaseAuth firebaseAuth;
   AuthRepositoryImpl({required this.firebaseAuth});
   @override
-  Future<void> logIn(String emailAddress, String password) async {
+  Future<UserCredential?> logIn(String emailAddress, String password) async {
     try {
       final credential = await firebaseAuth.createUserWithEmailAndPassword(
         email: emailAddress,
@@ -22,6 +23,7 @@ class AuthRepositoryImpl extends AuthRepository {
         colorText: AppColors.white,
         backgroundColor: AppColors.green,
       );
+      return credential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
       } else if (e.code == 'email-already-in-use') {
@@ -34,6 +36,7 @@ class AuthRepositoryImpl extends AuthRepository {
             colorText: AppColors.white,
             backgroundColor: AppColors.green,
           );
+          return credential;
         } on FirebaseAuthException catch (e) {
           if (e.code == "INVALID_LOGIN_CREDENTIALS") {
             Get.snackbar(
@@ -59,11 +62,14 @@ class AuthRepositoryImpl extends AuthRepository {
               backgroundColor: AppColors.red,
             );
           }
+          return null;
         }
       }
     } catch (e) {
       // print(e);
+      return null;
     }
+    return null;
   }
 
   @override
@@ -75,5 +81,17 @@ class AuthRepositoryImpl extends AuthRepository {
   Stream<User?> authState() {
     Stream<User?> user = firebaseAuth.authStateChanges();
     return user;
+  }
+
+  @override
+  Future<UserCredential?> googleLogin() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    return await firebaseAuth.signInWithCredential(credential);
   }
 }
