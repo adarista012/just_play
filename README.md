@@ -14,5 +14,5 @@ flutter run
 ```
 
 <p align="center">
-  <img src="images/logo.png" width="350" title="just play">
+  <img src="images/mock.png" width="350" title="just play">
 </p>
