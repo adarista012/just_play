@@ -6,6 +6,8 @@ This project is a test for Just Play.
 
 this version use `null safety` and `getx` as state management.
 
+`firebase authentication` and `google sign in` were used for the login.
+
 ## how to run the project.
 
 ```shell
