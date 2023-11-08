@@ -8,6 +8,8 @@ this version use `null safety` and `getx` as state management.
 
 `firebase authentication` and `google sign in` were used for the login.
 
+this version contains some native animations with `Tweens`
+
 ## how to run the project.
 
 ```shell
