@@ -4,9 +4,7 @@ import 'package:just_play/app/presentation/controllers/login_controller.dart';
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.
-        // lazyPut(() => LoginController(), fenix: true);
-        put(
+    Get.put(
       LoginController(),
     );
   }

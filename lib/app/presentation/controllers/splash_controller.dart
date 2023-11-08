@@ -24,7 +24,7 @@ class SplashController extends GetxController {
         if (user == null) {
           _routeName = Routes.LOGIN;
         } else {
-          _routeName = Routes.HOME;
+          _routeName = Routes.PERSONAL_SETTINGS;
         }
         if (_routeName != null) {
           Get.offAllNamed(_routeName!);

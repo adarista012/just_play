@@ -3,5 +3,7 @@
 abstract class Routes {
   static const HOME = "/home";
   static const LOGIN = "/login";
+  static const PERSONAL_SETTINGS = "/personalSettings";
+  static const PERSONAL_CITY = "/personalCity";
   static const SPLASH = "/splash";
 }
